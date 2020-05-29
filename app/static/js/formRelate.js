@@ -10,8 +10,9 @@ function checkRoomFormat() {
 }
 
 function checkTime(){
-    var startAt = value('startAt')
-    var endAt = value('endAt')
+    var startAt = parseInt(value('startAt'))
+    var endAt = parseInt(value('endAt'))
+
     console.log(endAt != 0)
     console.log(startAt <= endAt)
     return (startAt <= endAt) || (endAt == 0)
@@ -33,8 +34,8 @@ function inputAcceptable (){
 }
 
 function packageData() {
-    var endAt = value('endAt')
-    var startAt = value('startAt')
+    var startAt = parseInt(value('startAt'))
+    var endAt = parseInt(value('endAt'))
     
     console.log([startAt, endAt])
     endAt = endAt == 0 ? startAt : endAt;
