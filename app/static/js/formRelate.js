@@ -60,6 +60,7 @@ $("document").ready(function () {
 
     // no-used reset form
     $("#resetBtn").click(function () {
+        $("#room").val("")
         alert('這個重設按鈕目前沒啥屁用，只是擺好看的')
     })
 

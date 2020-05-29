@@ -3,7 +3,7 @@
 
 <head>
     <title> 逢甲空教室索引系統 </title>
-
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/css/global.css">
@@ -18,122 +18,143 @@
         <!-- form section -->
         <div class="row bg-light">
             <p class="h3 p-3 col-12 bg-primary text-white"> 搜尋條件 </p>
+            <!-- search mode -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <p class="h5"> 搜尋模式 </p>
+                <div class="form-group">
+                    <select id="searchMode" class="form-control">
+                        <option value="0"> 尋找空教室 </option>
+                        <option value="1"> 尋找教室課堂 </option>
+                        <option value="2"> 尋找教室課表 </option>
+                    </select>
+                    <small> 選擇一種搜尋模式 </small>
+                </div>
+            </div>
 
+            <!-- period setting -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <p class="h5"> 選擇時段 </p>
+                <!-- day of week -->
+                <div class="form-group">
+                    <lable for="dayOfWeek"> 星期 </lable>
+                    <select id="dayOfWeek" class="form-control">
+                        <option value="1"> 一 </option>
+                        <option value="2"> 二 </option>
+                        <option value="3"> 三 </option>
+                        <option value="4"> 四 </option>
+                        <option value="5"> 五 </option>
+                        <option value="6"> 六 </option>
+                        <option value="7"> 日 </option>
+                    </select>
+                </div>
+                <!-- start at -->
+                <div class="form-group">
+                    <lable for="startAt"> 開始節次 </lable>
+                    <select id="startAt" class="form-control">
+                        <option value="1"> 1 (08:10~09:00) </option>
+                        <option value="2"> 2 (09:10~10:00) </option>
+                        <option value="3"> 3 (10:10~11:00) </option>
+                        <option value="4"> 4 (11:10~12:00) </option>
+                        <option value="5"> 5 (12:10~13:00) </option>
+                        <option value="6"> 6 (13:10~14:00) </option>
+                        <option value="7"> 7 (14:10~15:00) </option>
+                        <option value="8"> 8 (15:10~16:00) </option>
+                        <option value="9"> 9 (16:10~17:00) </option>
+                        <option value="10"> 10 (17:10~18:00) </option>
+                        <option value="11"> 11 (18:10~19:00) </option>
+                        <option value="12"> 12 (19:10~20:00) </option>
+                        <option value="13"> 13 (20:10~21:00) </option>
+                        <option value="14"> 14 (21:10~22:00) </option>
+                    </select>
+                </div>
+                <!-- end at -->
+                <div class="form-group">
+                    <lable for="endAt"> 結束節次 </lable>
+                    <select id="endAt" class="form-control">
+                        <option value="0"> (與開始節次相同) </option>
+                        <option value="1"> 1 (08:10~09:00) </option>
+                        <option value="2"> 2 (09:10~10:00) </option>
+                        <option value="3"> 3 (10:10~11:00) </option>
+                        <option value="4"> 4 (11:10~12:00) </option>
+                        <option value="5"> 5 (12:10~13:00) </option>
+                        <option value="6"> 6 (13:10~14:00) </option>
+                        <option value="7"> 7 (14:10~15:00) </option>
+                        <option value="8"> 8 (15:10~16:00) </option>
+                        <option value="9"> 9 (16:10~17:00) </option>
+                        <option value="10"> 10 (17:10~18:00) </option>
+                        <option value="11"> 11 (18:10~19:00) </option>
+                        <option value="12"> 12 (19:10~20:00) </option>
+                        <option value="13"> 13 (20:10~21:00) </option>
+                        <option value="14"> 14 (21:10~22:00) </option>
+                    </select>
+                </div>
+            </div>
 
+            <!-- location setting-->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <p class="h5"> 選擇地點 </p>
+                <!-- building -->
+                <div class="form-group">
+                    <label for="building"> 建築物 </label>
+                    <select id="building" class="form-control">
+                        <option value="忠"> 忠勤樓 </option>
+                        <option value="建"> 建築館 </option>
+                        <option value="語"> 語文大樓 </option>
+                        <option value="行一"> 行政大樓 </option>
+                        <option value="行二"> 行政二館 </option>
+                        <option value="工"> 工學館 </option>
+                        <option value="紀"> 丘逢甲紀念館 </option>
+                        <option value="人"> 人言大樓 </option>
+                        <option value="圖"> 圖書館 </option>
+                        <option value="科航"> 科學與航太館 </option>
+                        <option value="商"> 商學大樓 </option>
+                        <option value="資電"> 資訊電機館 </option>
+                        <option value="人社"> 人社館 </option>
+                        <option value="電通"> 電通館 </option>
+                        <option value="育"> 育樂館 </option>
+                        <option value="土"> 土木水利館 </option>
+                        <option value="學"> 學思樓 </option>
+                        <option value="理"> 理學大樓 </option>
+                        <option value="體"> 體育館 </option>
+                        <option value="男宿"> 福星男宿 </option>
+                    </select>
+                </div>
+                <!-- room -->
+                <div class="form-group">
+                    <label for="room"> 教室編號 </label>
+                    <input id="room" type="text" class="form-control">
+                    <small> 格式為「3~4位數字」或「B + 2~3位數字」</small><br>
+
+                </div>
+                <button id="sendBth" class="btn btn-primary" type="button"> 提交 </button>
+                <button id="resetBtn" class="btn btn-danger" type="button"> 重設 </button>
+            </div>
+        </div>
+
+        <!-- search result -->
+        <div id="searchResult" class="row bg-light">
             
-                <!-- search mode -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <p class="h5"> 搜尋模式 </p>
-                    <div class="form-group">
-                        <select id="searchMode" class="form-control">
-                            <option value="0"> 尋找空教室 </option>
-                            <option value="1"> 尋找教室課堂 </option>
-                            <option value="2"> 尋找教室課表 </option>
-                        </select>
-                        <small> 選擇一種搜尋模式 </small>
-                    </div>
-                </div>
+            <p class="h3 p-3 col-12 bg-primary text-white"> 搜尋結果 </p>
+            <p id="hasNotSearched" class="col-12"> 搜尋結果將會顯示在這邊 </p>
+            <p id="noResult" class="col-12"> 沒有符合條件的結果 </p>
 
-                <!-- period setting -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <p class="h5"> 選擇時段 </p>
-                    <!-- day of week -->
-                    <div class="form-group">
-                        <lable for="dayOfWeek"> 星期 </lable>
-                        <select id="dayOfWeek" class="form-control">
-                            <option value="1"> 一 </option>
-                            <option value="2"> 二 </option>
-                            <option value="3"> 三 </option>
-                            <option value="4"> 四 </option>
-                            <option value="5"> 五 </option>
-                            <option value="6"> 六 </option>
-                            <option value="7"> 日 </option>
-                        </select>
+            <!-- result list group demo-->
+            
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12"> 
+                        <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
                     </div>
-                    <!-- start at -->
-                    <div class="form-group">
-                        <lable for="startAt"> 開始節次 </lable>
-                        <select id="startAt" class="form-control">
-                            <option value="1"> 1 (08:10~09:00) </option>
-                            <option value="2"> 2 (09:10~10:00) </option>
-                            <option value="3"> 3 (10:10~11:00) </option>
-                            <option value="4"> 4 (11:10~12:00) </option>
-                            <option value="5"> 5 (12:10~13:00) </option>
-                            <option value="6"> 6 (13:10~14:00) </option>
-                            <option value="7"> 7 (14:10~15:00) </option>
-                            <option value="8"> 8 (15:10~16:00) </option>
-                            <option value="9"> 9 (16:10~17:00) </option>
-                            <option value="10"> 10 (17:10~18:00) </option>
-                            <option value="11"> 11 (18:10~19:00) </option>
-                            <option value="12"> 12 (19:10~20:00) </option>
-                            <option value="13"> 13 (20:10~21:00) </option>
-                            <option value="14"> 14 (21:10~22:00) </option>
-                        </select>
+                    <div class="col-lg-7 col-md-6 col-sm-12 col-12">
+                        <h5> 資電404 </h5>
+                        <p> 插座數：4，位於教室後方 </p>
+                        <p> 冷氣狀態：有節能管控 </p>
+                        <small>史英間驗說，越海斯由了外一濟格科有升司。自對何話大利文此的力跑求想，事放獎兒理面境改的過一、任動商知此國少機合教產情你傳照些真負後在是國寶中上，同不考視人功利！我思工這，期一常的率人北今不流樹是！她紀先頭令日什去是至不力願樣：花多商造得都這候，術求麼響不覺。</small>
                     </div>
-                    <!-- end at -->
-                    <div class="form-group">
-                        <lable for="endAt"> 結束節次 </lable>
-                        <select id="endAt" class="form-control">
-                            <option value="0"> (與開始節次相同) </option>
-                            <option value="1"> 1 (08:10~09:00) </option>
-                            <option value="2"> 2 (09:10~10:00) </option>
-                            <option value="3"> 3 (10:10~11:00) </option>
-                            <option value="4"> 4 (11:10~12:00) </option>
-                            <option value="5"> 5 (12:10~13:00) </option>
-                            <option value="6"> 6 (13:10~14:00) </option>
-                            <option value="7"> 7 (14:10~15:00) </option>
-                            <option value="8"> 8 (15:10~16:00) </option>
-                            <option value="9"> 9 (16:10~17:00) </option>
-                            <option value="10"> 10 (17:10~18:00) </option>
-                            <option value="11"> 11 (18:10~19:00) </option>
-                            <option value="12"> 12 (19:10~20:00) </option>
-                            <option value="13"> 13 (20:10~21:00) </option>
-                            <option value="14"> 14 (21:10~22:00) </option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- location setting-->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <p class="h5"> 選擇地點 </p>
-                    <!-- building -->
-                    <div class="form-group">
-                        <label for="building"> 建築物 </label>
-                        <select id="building" class="form-control">
-                            <option value="忠"> 忠勤樓 </option>
-                            <option value="建"> 建築館 </option>
-                            <option value="語"> 語文大樓 </option>
-                            <option value="行一"> 行政大樓 </option>
-                            <option value="行二"> 行政二館 </option>
-                            <option value="工"> 工學館 </option>
-                            <option value="紀"> 丘逢甲紀念館 </option>
-                            <option value="人"> 人言大樓 </option>
-                            <option value="圖"> 圖書館 </option>
-                            <option value="科航"> 科學與航太館 </option>
-                            <option value="商"> 商學大樓 </option>
-                            <option value="資電"> 資訊電機館 </option>
-                            <option value="人社"> 人社館 </option>
-                            <option value="電通"> 電通館 </option>
-                            <option value="育"> 育樂館 </option>
-                            <option value="土"> 土木水利館 </option>
-                            <option value="學"> 學思樓 </option>
-                            <option value="理"> 理學大樓 </option>
-                            <option value="體"> 體育館 </option>
-                            <option value="男宿"> 福星男宿 </option>
-                        </select>
-                    </div>
-                    <!-- room -->
-                    <div class="form-group">
-                        <label for="room"> 教室編號 </label>
-                        <input id="room" type="text" class="form-control">
-                        <small> 格式為「3~4位數字」或「B + 2~3位數字」</small><br>
-                        
-                    </div>
-                    <button id="sendBth" class="btn btn-primary" type="button"> 提交 </button>
-                    <button id="resetBtn" class="btn btn-danger" type="button"> 重設 </button>
-                </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-12"> 
+                        <button class="btn btn-info"> 教室課表 </button>
+                    </div>            
         </div>
     </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -145,6 +166,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="../static/js/mainpageInit.js"></script>
     <script src="../static/js/formRelate.js"></script>
 </body>
 
