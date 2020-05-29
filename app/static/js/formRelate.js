@@ -72,5 +72,16 @@ $("document").ready(function () {
         }
         var data = packageData()
         console.log(data)
+        $.ajax({
+            url: '../a.html',
+            data: data,
+            type: "POST",
+            success: function(data){
+                alert("success section")
+            },
+            error: function(){
+                alert("error section")
+            }
+        })
     })
 })
