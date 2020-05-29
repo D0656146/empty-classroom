@@ -4,7 +4,7 @@ function value(id) {
 
 function checkRoomFormat() {
     var room = $('#room').val()
-    var pattern = /[0-9]{3,4}|B[0-9]{2,3}/
+    var pattern = /^([0-9]{3,4}|B[0-9]{2,3})$/
     var checked = room.match(pattern)
     return checked
 }
