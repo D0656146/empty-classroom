@@ -41,9 +41,9 @@ function packageData() {
     endAt = endAt == 0 ? startAt : endAt;
     console.log([startAt, endAt])
     var data = {
-        "searchMode": value("searchMode"),
+        "searchMode": parseInt(value("searchMode")),
         "period": {
-            "dayOfWeek": value("dayOfWeek"),
+            "dayOfWeek": parseInt(value("dayOfWeek")),
             "startAt": startAt,
             "endAt": endAt
         },
