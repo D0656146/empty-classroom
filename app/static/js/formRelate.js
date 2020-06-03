@@ -149,7 +149,6 @@ $("document").ready(function () {
         for(var i = 0; i < x["locate"].length; i++){
             console.log(x["locate"][i])
             showResult(x["locate"][i])
-            console.log(x["locate"][i])
         }
     })
 })
