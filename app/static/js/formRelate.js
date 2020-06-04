@@ -126,6 +126,7 @@ $("document").ready(function () {
     })
 
     $('#testOutput').click(function(){
+        clearResult()
         var x = {
             "searchMode": 0,
             "locate":[
@@ -149,6 +150,13 @@ $("document").ready(function () {
         for(var i = 0; i < x["locate"].length; i++){
             console.log(x["locate"][i])
             showResult(x["locate"][i])
+            if(i < x["locate"].length - 1){
+                $("#searchResult").append(
+                    `
+                        <div class="breakline col-12"></div>
+                    `
+                )
+            }
         }
     })
 })

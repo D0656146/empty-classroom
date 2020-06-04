@@ -12,5 +12,18 @@ body{
 
 button {
     float: right;
-    margin: 10px;
+    margin: 10px
+}
+
+.breakline {
+    height: 3px;
+    border: 3px;
+    background-color: gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
