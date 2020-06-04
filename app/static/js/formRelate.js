@@ -66,11 +66,11 @@ function clearResult(){
 }
 
 function showResult(obj){
-    console.log(obj)
+    //console.log(obj["building"])
     $("#searchResult").append(
         `
             <div class="col-lg-3 col-md-4 col-sm-12 col-12 buildingImage">
-                <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
+                <img src="../static/img/${obj["building"]}.jpg" class="img-thumbnail" alt="${obj["building"]}.jpg">
             </div> 
             <div class="col-lg-7 col-md-6 col-sm-12 col-12 roomInformation">
                 <h5> ${obj["building"]}${obj["room"]} </h5>
@@ -136,12 +136,12 @@ $("document").ready(function () {
                     "info": ""
                 },
                 {
-                    "building": "資電",
+                    "building": "人",
                     "room": 405,
                     "info": ""
                 },
                 {
-                    "building": "資電",
+                    "building": "中科",
                     "room": 406,
                     "info": ""
                 }
