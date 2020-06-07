@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from werkzeug.utils import import_string
 
 
 def create_app(test_config=None):
@@ -24,13 +25,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
-    # initialize database
-    from . import db
-    db.init_app(app)
+    # load blueprint
+    bp = import_string('app.main.main:main')
+    app.register_blueprint(bp)
 
     return app
