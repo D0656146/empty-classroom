@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <select id="searchMode" class="form-control">
                             <option value="0"> 尋找空教室 </option>
-                            <option value="1"> 尋找教室課堂 </option>
+                            <option value="1" disabled> 尋找教室課堂（開發中） </option>
                             <option value="2"> 尋找教室課表 </option>
                         </select>
                         <small> 選擇一種搜尋模式 </small>
@@ -55,20 +55,20 @@
                     <div class="form-group">
                         <lable for="startAt"> 開始節次 </lable>
                         <select id="startAt" class="form-control">
-                            <option value="1"> 1 (08:10~09:00) </option>
-                            <option value="2"> 2 (09:10~10:00) </option>
-                            <option value="3"> 3 (10:10~11:00) </option>
-                            <option value="4"> 4 (11:10~12:00) </option>
-                            <option value="5"> 5 (12:10~13:00) </option>
-                            <option value="6"> 6 (13:10~14:00) </option>
-                            <option value="7"> 7 (14:10~15:00) </option>
-                            <option value="8"> 8 (15:10~16:00) </option>
-                            <option value="9"> 9 (16:10~17:00) </option>
-                            <option value="10"> 10 (17:10~18:00) </option>
-                            <option value="11"> 11 (18:10~19:00) </option>
-                            <option value="12"> 12 (19:10~20:00) </option>
-                            <option value="13"> 13 (20:10~21:00) </option>
-                            <option value="14"> 14 (21:10~22:00) </option>
+                            <option value="1"> 1 (08:10~) </option>
+                            <option value="2"> 2 (09:10~) </option>
+                            <option value="3"> 3 (10:10~) </option>
+                            <option value="4"> 4 (11:10~) </option>
+                            <option value="5"> 5 (12:10~) </option>
+                            <option value="6"> 6 (13:10~) </option>
+                            <option value="7"> 7 (14:10~) </option>
+                            <option value="8"> 8 (15:10~) </option>
+                            <option value="9"> 9 (16:10~) </option>
+                            <option value="10"> 10 (17:10~) </option>
+                            <option value="11"> 11 (18:10~) </option>
+                            <option value="12"> 12 (19:10~) </option>
+                            <option value="13"> 13 (20:10~) </option>
+                            <option value="14"> 14 (21:10~) </option>
                         </select>
                     </div>
                     <!-- end at -->
@@ -76,20 +76,20 @@
                         <lable for="endAt"> 結束節次 </lable>
                         <select id="endAt" class="form-control">
                             <option value="0"> (與開始節次相同) </option>
-                            <option value="1"> 1 (08:10~09:00) </option>
-                            <option value="2"> 2 (09:10~10:00) </option>
-                            <option value="3"> 3 (10:10~11:00) </option>
-                            <option value="4"> 4 (11:10~12:00) </option>
-                            <option value="5"> 5 (12:10~13:00) </option>
-                            <option value="6"> 6 (13:10~14:00) </option>
-                            <option value="7"> 7 (14:10~15:00) </option>
-                            <option value="8"> 8 (15:10~16:00) </option>
-                            <option value="9"> 9 (16:10~17:00) </option>
-                            <option value="10"> 10 (17:10~18:00) </option>
-                            <option value="11"> 11 (18:10~19:00) </option>
-                            <option value="12"> 12 (19:10~20:00) </option>
-                            <option value="13"> 13 (20:10~21:00) </option>
-                            <option value="14"> 14 (21:10~22:00) </option>
+                            <option value="1"> 1 (~09:00) </option>
+                            <option value="2"> 2 (~10:00) </option>
+                            <option value="3"> 3 (~11:00) </option>
+                            <option value="4"> 4 (~12:00) </option>
+                            <option value="5"> 5 (~13:00) </option>
+                            <option value="6"> 6 (~14:00) </option>
+                            <option value="7"> 7 (~15:00) </option>
+                            <option value="8"> 8 (~16:00) </option>
+                            <option value="9"> 9 (~17:00) </option>
+                            <option value="10"> 10 (~18:00) </option>
+                            <option value="11"> 11 (~19:00) </option>
+                            <option value="12"> 12 (~20:00) </option>
+                            <option value="13"> 13 (~21:00) </option>
+                            <option value="14"> 14 (~22:00) </option>
                         </select>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
                             <option value="忠"> 忠勤樓 </option>
                             <option value="建"> 建築館 </option>
                             <option value="語"> 語文大樓 </option>
-                            <option value="行一"> 行政大樓 </option>
-                            <option value="行二"> 行政二館 </option>
+                            <option value="行一" disabled> 行政大樓（無可用教室） </option>
+                            <option value="行政二館"> 行政二館 </option>
                             <option value="工"> 工學館 </option>
                             <option value="紀"> 丘逢甲紀念館 </option>
                             <option value="人"> 人言大樓 </option>
@@ -113,9 +113,9 @@
                             <option value="科航"> 科學與航太館 </option>
                             <option value="商"> 商學大樓 </option>
                             <option value="資電"> 資訊電機館 </option>
-                            <option value="人社"> 人社館 </option>
+                            <option value="人社" disabled> 人社館（無可用教室） </option>
                             <option value="電通"> 電通館 </option>
-                            <option value="育"> 育樂館 </option>
+                            <option value="育" disabled> 育樂館（無可用教室） </option>
                             <option value="土"> 土木水利館 </option>
                             <option value="學"> 學思樓 </option>
                             <option value="理"> 理學大樓 </option>
@@ -131,9 +131,9 @@
                         <small> 格式為「3~4位數字」或「B + 2~3位數字」</small><br>
 
                     </div>
-                    <button id="sendBth" class="btn btn-primary" type="button"> 提交 </button>
-                    <button id="resetBtn" class="btn btn-danger" type="button"> 重設 </button>
-                    <button id="testOutput" class="btn btn-warning" type="button"> 預覽 </button>
+                    <button id="sendBth" class="btn btn-primary serachBtn" type="button"> 提交 </button>
+                    <button id="resetBtn" class="btn btn-danger serachBtn" type="button"> 重設 </button>
+                    <button id="testOutput" class="btn btn-warning serachBtn" type="button"> 預覽 </button>
                 </div>
             </div>
 
@@ -141,10 +141,11 @@
             <div id="searchResult" class="row bg-light">
 
                 <p class="h3 p-3 col-12 bg-primary text-white"> 搜尋結果 </p>
+                <!--
                 <p id="hasNotSearched" class="col-12"> 搜尋結果將會顯示在這邊 </p>
                 <p id="noResult" class="col-12"> 沒有符合條件的結果 </p>
 
-                <!-- result list group demo-->
+                <!-- result list group demo -0->
 
                 <div class="col-lg-3 col-md-4 col-sm-12 col-12 buildingImage">
                     <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
@@ -157,7 +158,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-12 col-12 roomTable">
                     <button class="btn btn-info"> 教室課表 </button>
-                </div>
+                </div>-->
             </div>
         </div>
     </main>
