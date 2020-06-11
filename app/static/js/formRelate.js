@@ -1,4 +1,5 @@
-currentBuilding = ""
+var currentBuilding = ""
+var checkTableBtn = $('.checkTable')
 
 function value(id) {
     return $('#' + id).val()
@@ -56,16 +57,30 @@ function packageData() {
 }
 
 function clearResult() {
+    console.log(123)
     $(".buildingImage").remove()
     $(".roomInformation").remove()
     $(".roomTable").remove()
     $("#hasNotSearched").show()
     $("#noResult").hide()
+    $("#searchResult > *").remove
     currentBuilding = ""
+}
+
+function takeTable(obj){
+    var x = {
+        'searchMode': 2,
+        'building': currentBuilding,
+        'room': obj.id
+    }
+    console.log(typeof obj.id)
+    return x
 }
 
 function showResult(obj) {
     //console.log(obj["building"])
+    clearResult()
+    currentBuilding = obj.building
     $("#searchResult").append(`
         <div class="col-lg-6 col-md-6 col-12">
             <img src="../static/img/${obj.building}.jpg" class="img-thumbnail" alt="${obj.building}">
@@ -78,7 +93,7 @@ function showResult(obj) {
         console.log(obj.rooms[i])
         $("#classLable").append(`
             <div class="resultList">
-                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.building}${obj.rooms[i]}">
+                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.rooms[i]}">
                     ${obj.building}${obj.rooms[i]}
                 </button>
             </div>
@@ -87,6 +102,19 @@ function showResult(obj) {
     if (obj.rooms.length == 0) {
         $("#classLable").append(`<h4> 沒有符合條件的結果 </h4>`)
     }
+
+    $(".checkTable").click(function(){
+        console.log(this.id)
+        $.ajax({
+            type: "GET",
+            data: takeTable(this),
+            datatype: 'json',
+            success: function(e){
+                //make table
+            }
+
+        })
+    })
 }
 
 $("document").ready(function () {
@@ -95,7 +123,6 @@ $("document").ready(function () {
     //clearResult()
     $("#resetBtn").click(function () {
         $("#room").val("")
-        alert('這個重設按鈕目前沒啥屁用，只是擺好看的')
     })
 
     // send require and data to server
@@ -108,45 +135,35 @@ $("document").ready(function () {
         var data = packageData()
         currentBuilding = $('#building').val()
         console.log(data)
+
         $.ajax({
-            url: '/app/templates/mainPage.html',
+            url: './mainPage.html',
             data: packageData(),
             type: "GET",
+            datatype: "json",
             success: function (e) {
-                alert("success section")
                 console.log(e)
-                if (e.lenght == 0) {
-                    $("noResult").show()
-                }
-                else {
-                    for (var i = 0; i < e.lenght; i++) {
-                        showResult(e[i])
-                    }
-                }
+                showResult(e)
             },
-            error: function () {
-                alert("error section")
+            error: function (e) {
+                alert(  )
             }
         })
     })
 
     $('#testOutput').click(function () {
-        clearResult()
         var x = {
             "building": "資電",
-            "rooms": [404, 405, 406]
+            "rooms": ['404A', '405', '406']
         }
 
         console.log(x)
         showResult(x)
 
-    })
+        console.log($("button"))
 
-    $('.checkTable').click(function () {
-        console.log(this.id)
     })
+    
+    
 })
-
-
-
 

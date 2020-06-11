@@ -1,3 +1,5 @@
+var currentPage = 0
+
 function getValue(id) {
     return $("#" + id).val()
 }
@@ -21,7 +23,7 @@ function checkInput(){
     return true;
 }
 
-function packageData(){
+function sendMessage(){
     var x = {
         'title': getValue('messageTitle'),
         'content': getValue('message'),
@@ -29,6 +31,10 @@ function packageData(){
     }
     console.log(x)
     return x
+}
+
+function getPage(){
+
 }
 
 $("document").ready(function () {
@@ -44,11 +50,16 @@ $("document").ready(function () {
         if(checkInput()){
             if(window.confirm("確定要發表文章？")){
                 $.ajax({
-                    url: '/app/templates/messageBoard.html',
-                    data: packageData(),
+                    url: '../../main/main.py',
+                    data: sendMessage(),
+                    datatype: 'json',
                     type: "GET",
-                    success: function(e){},
-                    error: function(){}
+                    success: function(e){
+                        alert('在審核後將會顯示')
+                    },
+                    error: function(e){
+                        alert('發生不可預期的錯誤')
+                    }
 
                 })
             }
