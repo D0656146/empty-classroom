@@ -137,7 +137,6 @@ $("document").ready(function () {
         console.log(data)
 
         $.ajax({
-            url: './mainPage.html',
             data: packageData(),
             type: "GET",
             datatype: "json",

@@ -11,12 +11,16 @@ def root():
 @main.route('/search/')
 def search():
     searchMode = request.args.get('searchMode')
+    searchMode = '' if not searchMode else int(searchMode)
     building = request.args.get('building')
     room = request.args.get('room')
     if searchMode == 0:
         dayOfWeek = request.args.get('dayOfWeek')
+        dayOfWeek = '' if not dayOfWeek else int(dayOfWeek)
         startAt = request.args.get('startAt')
+        startAt = '' if not startAt else int(startAt)
         endAt = request.args.get('endAt')
+        endAt = '' if not endAt else int(endAt)
         if not building or not startAt or not endAt or startAt < endAt:
             return 'leak of arguments'
         sessions = range((dayOfWeek - 1) * 7 + startAt,
@@ -26,7 +30,7 @@ def search():
         if not building or not room:
             return 'unknown classroom'
         return search_curriculum(building, room)
-    elif searchMode is None:
+    elif not searchMode:
         return render_template('mainPage.html')
     else:
         return 'unknown search mode'
@@ -50,12 +54,12 @@ def search_curriculum(building, room):
 
 def search_empty_classroom(building, room, sessions):
     db = get_db()
-    command = 'SELECT id, socket, ac FROM Classroom WHERE building = ${building}'
+    command = f'SELECT id, socket, ac FROM Classroom WHERE building = {building}'
     if room:
-        command += ' AND room = ${room}'
-    command += ' AND id NOT EXISTS (SELECT classroom FROM Period WHERE'
+        command += f' AND room = {room}'
+    command += ' AND id NOT IN (SELECT classroom FROM Period WHERE'
     for session in sessions:
-        command += ' session = ${session} OR'
+        command += f' session = {session} OR'
     command = command[0:-2]
     command += ') ORDER BY id;'
     cursor = db.execute(command)

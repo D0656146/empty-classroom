@@ -1,0 +1,13 @@
+INSERT INTO Building (building) VALUES ('資電');
+INSERT INTO Classroom (id, building) VALUES ('404', '資電');
+INSERT INTO Classroom (id, building) VALUES ('403', '資電');
+INSERT INTO Classroom (id, building) VALUES ('B19', '資電');
+INSERT INTO Course (id, name) VALUES (1234, '資料庫系統');
+INSERT INTO Course (id, name) VALUES (5678, '其他課程');
+INSERT INTO Course (id, name) VALUES (9487, '電腦課');
+INSERT INTO Period (session, course, classroom, building) VALUES ('6', '資料庫系統', '404', '資電');
+INSERT INTO Period (session, course, classroom, building) VALUES ('7', '資料庫系統', '404', '資電');
+INSERT INTO Period (session, course, classroom, building) VALUES ('8', '其他課程', '403', '資電');
+INSERT INTO Period (session, course, classroom, building) VALUES ('9', '其他課程', '403', '資電');
+INSERT INTO Period (session, course, classroom, building) VALUES ('7', '電腦課', 'B19', '資電');
+INSERT INTO Period (session, course, classroom, building) VALUES ('8', '電腦課', 'B19', '資電');
