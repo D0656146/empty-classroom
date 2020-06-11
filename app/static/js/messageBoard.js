@@ -4,26 +4,26 @@ function getValue(id) {
     return $("#" + id).val()
 }
 
-function checkInput(){
+function checkInput() {
     var title = getValue("messageTitle")
     var nickname = getValue("messageNickname")
     var context = getValue('message')
-    if(title.length < 5 || title.length > 50){
+    if (title.length < 5 || title.length > 50) {
         alert('標題需要 5~50 個字元')
         return false
     }
-    else if(nickname.length < 3 || nickname.length > 20){
+    else if (nickname.length < 3 || nickname.length > 20) {
         alert('暱稱需要 3~20 個字元')
         return false
     }
-    else if(context.length < 10 || context.length > 300){
+    else if (context.length < 10 || context.length > 300) {
         alert('內文需要 10~300 個字元')
         return false
     }
     return true;
 }
 
-function sendMessage(){
+function sendMessage() {
     var x = {
         'title': getValue('messageTitle'),
         'content': getValue('message'),
@@ -33,11 +33,64 @@ function sendMessage(){
     return x
 }
 
-function getPage(){
-
+function showMessage(e) {
+    
+    if(e.isPinned){
+        $('#topicMessageGroup').append(`
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+                <h4 class="font-weight-bolder"> ${e.title} </h4>
+                <p> ${e.content} </p>
+                <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.time}，訊息編號：<a href="#">T${e.id}</a></small>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <button class="btn btn-primary replyBtn"> 回應 </button>
+            </div>
+        `)
+    }else{
+        $('#railButton').before(`
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+                <h4 class="font-weight-bolder"> ${e.title} </h4>
+                <p> ${e.content} </p>
+                <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.time}，訊息編號：<a href="#">T${e.id}</a></small>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <button class="btn btn-primary replyBtn"> 回應 </button>
+            </div>
+        `)
+    }
 }
 
+function getPage() {
+    $.ajax({
+        data: ++currentPage,
+        datatype: 'json',
+        type: 'GET',
+        success: function (e) {
+            var len = e.length
+            for (var i = 0; i < len; i++) {
+                showMessage(e)
+            }
+        },
+        error: function (e) {
+            alert(`加載留言發生不可預期的錯誤，請稍後再試`)
+            currentPage--
+        }
+    })
+}
+
+
 $("document").ready(function () {
+    
+    $("#get-Content").click(function () {
+        getPage()
+    })
+
     $("#resetMessageBth").click(function () {
         var bool = confirm("確定是否重新填寫？")
         if (bool == true) {
@@ -46,26 +99,50 @@ $("document").ready(function () {
         }
     })
 
-    $("#postMessageBth").click(function() {
-        if(checkInput()){
-            if(window.confirm("確定要發表文章？")){
+    $("#postMessageBth").click(function () {
+        if (checkInput()) {
+            if (window.confirm("確定要發表文章？")) {
                 $.ajax({
                     url: '../../main/main.py',
                     data: sendMessage(),
                     datatype: 'json',
-                    type: "GET",
-                    success: function(e){
+                    type: "POST",
+                    success: function (e) {
                         alert('在審核後將會顯示')
                     },
-                    error: function(e){
-                        alert('發生不可預期的錯誤')
+                    error: function (e) {
+                        alert('發生不可預期的錯誤，請稍後再試')
                     }
-
                 })
             }
         }
-        
+
     })
+
+    $('.test').click(function () {
+        var x = [{
+            'id': 1,
+            'title': "AAA",
+            'content': "123456789",
+            'time': "2020-06-03T12:25:43.511Z",
+            'isPinned': true,
+            'username': "jibanyan"
+        },
+        {
+            'id': 2,
+            'title': "AAA",
+            'content': "123456789",
+            'time': "2020-06-03T12:25:43.511Z",
+            'isPinned': false,
+            'username': "jibanyan"
+        }]
+
+        for(var i = 0; i < x.length; i++){
+            showMessage(x[i])
+        }
+    })
+
+    getPage()
 })
 
 /*
