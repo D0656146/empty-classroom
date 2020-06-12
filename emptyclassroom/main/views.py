@@ -1,6 +1,6 @@
 from emptyclassroom.db import get_db
 from emptyclassroom.main.main import main
-from flask import render_template, request, jsonify, redirect
+from flask import render_template, request, jsonify
 
 
 @main.route('/')
@@ -79,10 +79,13 @@ def board():
     db = get_db()
     if request.method == 'POST':
         data = request.get_json()
-        db.execute('INSERT INTO User (name) VALUES (?);', (data['username'],))
+        print(data['username'])
+        if not db.execute('SELECT name FROM User WHERE name = ?;', (data['username'],)):
+            db.execute('INSERT INTO User (name) VALUES (?);', (data['username'],))
         db.execute('INSERT INTO Post (title, content, username) VALUES (?, ?, ?);',
                    (data['title'], data['content'], data['username']))
-        return redirect('/board/')
+        db.commit()
+        return 'success'
     else:
         page = request.args.get('page')
         page = '' if not page else int(page)

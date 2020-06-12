@@ -87,7 +87,7 @@ function getPage() {
 
 $("document").ready(function () {
     
-    $("#get-Content").click(function () {
+    $(".get-content").click(function () {
         getPage()
     })
 
@@ -107,14 +107,15 @@ $("document").ready(function () {
                     contentType: 'application/json',
                     dataType: 'json',
                     type: "POST",
-                    // 這邊出了大問題待解決
-                    success: function (e) {
-                        location.href = e.location
-                        // alert('在審核後將會顯示')
-                    },
-                    error: function (e) {
-                        if (e.status == 302) {
-                            location.href = e.location
+                    // 放棄重整頁面
+                    /* success: function (e) {
+                        console.log(e)
+                        // location.href = e.location
+                        alert('在審核後將會顯示')
+                    }, */
+                    complete: function (xhr, status) {
+                        if (xhr.status == 200) {
+                            alert('發表成功')
                         } else {
                             alert('發生不可預期的錯誤，請稍後再試')
                         }
