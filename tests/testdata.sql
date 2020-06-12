@@ -1,4 +1,4 @@
-INSERT INTO Building (building) VALUES ('資電');
+INSERT INTO Building (name) VALUES ('資電');
 INSERT INTO Classroom (id, building) VALUES ('404', '資電');
 INSERT INTO Classroom (id, building) VALUES ('403', '資電');
 INSERT INTO Classroom (id, building) VALUES ('B19', '資電');

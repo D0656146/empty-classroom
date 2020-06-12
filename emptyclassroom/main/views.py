@@ -1,6 +1,6 @@
-from app.db import get_db
-from app.main.main import main
-from flask import render_template, request
+from emptyclassroom.db import get_db
+from emptyclassroom.main.main import main
+from flask import render_template, request, jsonify
 
 
 @main.route('/')
@@ -49,14 +49,14 @@ def search_curriculum(building, room):
         timetable.append(copy.deepcopy(json_period))
     curriculum = {'locate': {'building': building, 'room': room}}
     curriculum['timetable'] = timetable
-    return curriculum
+    return jsonify(curriculum)
 
 
 def search_empty_classroom(building, room, sessions):
     db = get_db()
-    command = f'SELECT id, socket, ac FROM Classroom WHERE building = {building}'
+    command = f"SELECT id, socket, ac FROM Classroom WHERE building = '{building}'"
     if room:
-        command += f' AND room = {room}'
+        command += f" AND room = '{room}''"
     command += ' AND id NOT IN (SELECT classroom FROM Period WHERE'
     for session in sessions:
         command += f' session = {session} OR'
@@ -69,9 +69,9 @@ def search_empty_classroom(building, room, sessions):
         json_classroom = {}
         for index, field in enumerate(classroom):
             json_classroom[classroom_field[index]] = field
-        classrooms.append(copy.deepcopy(json_classroom))
+        classrooms.append(json_classroom)
     empty_classrooms = {'building': building, 'classrooms': classrooms}
-    return empty_classrooms
+    return jsonify(empty_classrooms)
 
 
 @main.route('/board/')
@@ -98,6 +98,6 @@ def board():
                 for index, field in enumerate(post):
                     json_post[post_fields[index]] = field
                 posts.append(copy.deepcopy(json_post))
-            return posts
+            return jsonify(posts)
         else:
             return render_template('messageBoard.html')
