@@ -27,7 +27,7 @@ function sendMessage() {
     var x = {
         'title': getValue('messageTitle'),
         'content': getValue('message'),
-        'user': getValue('messageNickname')
+        'username': getValue('messageNickname')
     }
     console.log(x)
     return x
@@ -43,7 +43,7 @@ function showMessage(e) {
             <div class="col-lg-8 col-md-8 col-sm-12 col-12">
                 <h4 class="font-weight-bolder"> ${e.title} </h4>
                 <p> ${e.content} </p>
-                <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.time}，訊息編號：<a href="#">T${e.id}</a></small>
+                <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.posttime}，訊息編號：<a href="#">T${e.id}</a></small>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <button class="btn btn-primary replyBtn"> 回應 </button>
@@ -57,7 +57,7 @@ function showMessage(e) {
             <div class="col-lg-8 col-md-8 col-sm-12 col-12">
                 <h4 class="font-weight-bolder"> ${e.title} </h4>
                 <p> ${e.content} </p>
-                <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.time}，訊息編號：<a href="#">T${e.id}</a></small>
+                <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.posttime}，訊息編號：<a href="#">T${e.id}</a></small>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <button class="btn btn-primary replyBtn"> 回應 </button>
@@ -68,13 +68,13 @@ function showMessage(e) {
 
 function getPage() {
     $.ajax({
-        data: ++currentPage,
-        datatype: 'json',
+        data: {'page': ++currentPage},
+        dataType: 'json',
         type: 'GET',
         success: function (e) {
             var len = e.length
             for (var i = 0; i < len; i++) {
-                showMessage(e)
+                showMessage(e[i])
             }
         },
         error: function (e) {
@@ -103,15 +103,21 @@ $("document").ready(function () {
         if (checkInput()) {
             if (window.confirm("確定要發表文章？")) {
                 $.ajax({
-                    url: '../../main/main.py',
-                    data: sendMessage(),
-                    datatype: 'json',
+                    data: JSON.stringify(sendMessage()),
+                    contentType: 'application/json',
+                    dataType: 'json',
                     type: "POST",
+                    // 這邊出了大問題待解決
                     success: function (e) {
-                        alert('在審核後將會顯示')
+                        location.href = e.location
+                        // alert('在審核後將會顯示')
                     },
                     error: function (e) {
-                        alert('發生不可預期的錯誤，請稍後再試')
+                        if (e.status == 302) {
+                            location.href = e.location
+                        } else {
+                            alert('發生不可預期的錯誤，請稍後再試')
+                        }
                     }
                 })
             }
@@ -124,7 +130,7 @@ $("document").ready(function () {
             'id': 1,
             'title': "AAA",
             'content': "123456789",
-            'time': "2020-06-03T12:25:43.511Z",
+            'posttime': "2020-06-03T12:25:43.511Z",
             'isPinned': true,
             'username': "jibanyan"
         },
@@ -132,7 +138,7 @@ $("document").ready(function () {
             'id': 2,
             'title': "AAA",
             'content': "123456789",
-            'time': "2020-06-03T12:25:43.511Z",
+            'posttime': "2020-06-03T12:25:43.511Z",
             'isPinned': false,
             'username': "jibanyan"
         }]

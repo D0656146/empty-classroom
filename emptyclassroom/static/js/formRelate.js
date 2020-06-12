@@ -93,7 +93,7 @@ function showResult(obj) {
         console.log(obj.classrooms[i])
         $("#classLable").append(`
             <div class="resultList">
-                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.classrooms[i]}">
+                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.classrooms[i].room}">
                     ${obj.building}${obj.classrooms[i].room}
                 </button>
             </div>

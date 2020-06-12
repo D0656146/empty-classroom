@@ -1,6 +1,6 @@
 from emptyclassroom.db import get_db
 from emptyclassroom.main.main import main
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect
 
 
 @main.route('/')
@@ -39,14 +39,14 @@ def search():
 def search_curriculum(building, room):
     db = get_db()
     cursor = db.execute(
-        'SELECT session, course FROM Period WHERE building = ? AND room = ? ORDER BY session;', (building, room))
+        "SELECT session, course FROM Period WHERE building = ? AND classroom = ? ORDER BY session;", (building, room))
     period_fields = ('session', 'course')
     timetable = []
     for period in cursor:
         json_period = {}
         for index, field in enumerate(period):
             json_period[period_fields[index]] = field
-        timetable.append(copy.deepcopy(json_period))
+        timetable.append(json_period)
     curriculum = {'locate': {'building': building, 'room': room}}
     curriculum['timetable'] = timetable
     return jsonify(curriculum)
@@ -56,7 +56,7 @@ def search_empty_classroom(building, room, sessions):
     db = get_db()
     command = f"SELECT id, socket, ac FROM Classroom WHERE building = '{building}'"
     if room:
-        command += f" AND room = '{room}''"
+        command += f" AND id = '{room}'"
     command += ' AND id NOT IN (SELECT classroom FROM Period WHERE'
     for session in sessions:
         command += f' session = {session} OR'
@@ -74,15 +74,18 @@ def search_empty_classroom(building, room, sessions):
     return jsonify(empty_classrooms)
 
 
-@main.route('/board/')
+@main.route('/board/', methods=['GET', 'POST'])
 def board():
     db = get_db()
     if request.method == 'POST':
-        db.execute('INSERT INTO table_name (title, content, username) VALUES (?, ?, ?);',
-                   (request.values[title], request.values[content], request.values[username]))
-        return redirect("/board/")
+        data = request.get_json()
+        db.execute('INSERT INTO User (name) VALUES (?);', (data['username'],))
+        db.execute('INSERT INTO Post (title, content, username) VALUES (?, ?, ?);',
+                   (data['title'], data['content'], data['username']))
+        return redirect('/board/')
     else:
         page = request.args.get('page')
+        page = '' if not page else int(page)
         if page:
             cursor = db.execute(
                 'SELECT * FROM Post ORDER BY isPinned DESC, posttime DESC;')
@@ -97,7 +100,7 @@ def board():
                 json_post = {}
                 for index, field in enumerate(post):
                     json_post[post_fields[index]] = field
-                posts.append(copy.deepcopy(json_post))
+                posts.append(json_post)
             return jsonify(posts)
         else:
             return render_template('messageBoard.html')

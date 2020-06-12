@@ -11,3 +11,18 @@ INSERT INTO Period (session, course, classroom, building) VALUES ('8', '其他�
 INSERT INTO Period (session, course, classroom, building) VALUES ('9', '其他課程', '403', '資電');
 INSERT INTO Period (session, course, classroom, building) VALUES ('7', '電腦課', 'B19', '資電');
 INSERT INTO Period (session, course, classroom, building) VALUES ('8', '電腦課', 'B19', '資電');
+INSERT INTO User (name) VALUES ('蛙');
+INSERT INTO Post (title, content, username) VALUES ('第一篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第二篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第三篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第四篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第五篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第六篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第七篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第八篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第九篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第十篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第欸篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第逼篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username) VALUES ('第吸篇貼文', '拉拉拉', '蛙');
+INSERT INTO Post (title, content, username, isPinned) VALUES ('第低篇貼文置頂', '拉拉拉', '蛙', true);
