@@ -1,6 +1,6 @@
-from app.db import get_db
-from app.main.main import main
-from flask import render_template, request
+from emptyclassroom.db import get_db
+from emptyclassroom.main.main import main
+from flask import render_template, request, jsonify
 
 
 @main.route('/')
@@ -11,12 +11,16 @@ def root():
 @main.route('/search/')
 def search():
     searchMode = request.args.get('searchMode')
+    searchMode = '' if not searchMode else int(searchMode)
     building = request.args.get('building')
     room = request.args.get('room')
     if searchMode == 0:
         dayOfWeek = request.args.get('dayOfWeek')
+        dayOfWeek = '' if not dayOfWeek else int(dayOfWeek)
         startAt = request.args.get('startAt')
+        startAt = '' if not startAt else int(startAt)
         endAt = request.args.get('endAt')
+        endAt = '' if not endAt else int(endAt)
         if not building or not startAt or not endAt or startAt < endAt:
             return 'leak of arguments'
         sessions = range((dayOfWeek - 1) * 7 + startAt,
@@ -26,7 +30,7 @@ def search():
         if not building or not room:
             return 'unknown classroom'
         return search_curriculum(building, room)
-    elif searchMode is None:
+    elif not searchMode:
         return render_template('mainPage.html')
     else:
         return 'unknown search mode'
@@ -35,27 +39,27 @@ def search():
 def search_curriculum(building, room):
     db = get_db()
     cursor = db.execute(
-        'SELECT session, course FROM Period WHERE building = ? AND room = ? ORDER BY session;', (building, room))
+        "SELECT session, course FROM Period WHERE building = ? AND classroom = ? ORDER BY session;", (building, room))
     period_fields = ('session', 'course')
     timetable = []
     for period in cursor:
         json_period = {}
         for index, field in enumerate(period):
             json_period[period_fields[index]] = field
-        timetable.append(copy.deepcopy(json_period))
+        timetable.append(json_period)
     curriculum = {'locate': {'building': building, 'room': room}}
     curriculum['timetable'] = timetable
-    return curriculum
+    return jsonify(curriculum)
 
 
 def search_empty_classroom(building, room, sessions):
     db = get_db()
-    command = 'SELECT id, socket, ac FROM Classroom WHERE building = ${building}'
+    command = f"SELECT id, socket, ac FROM Classroom WHERE building = '{building}'"
     if room:
-        command += ' AND room = ${room}'
-    command += ' AND id NOT EXISTS (SELECT classroom FROM Period WHERE'
+        command += f" AND id = '{room}'"
+    command += ' AND id NOT IN (SELECT classroom FROM Period WHERE'
     for session in sessions:
-        command += ' session = ${session} OR'
+        command += f' session = {session} OR'
     command = command[0:-2]
     command += ') ORDER BY id;'
     cursor = db.execute(command)
@@ -65,20 +69,26 @@ def search_empty_classroom(building, room, sessions):
         json_classroom = {}
         for index, field in enumerate(classroom):
             json_classroom[classroom_field[index]] = field
-        classrooms.append(copy.deepcopy(json_classroom))
+        classrooms.append(json_classroom)
     empty_classrooms = {'building': building, 'classrooms': classrooms}
-    return empty_classrooms
+    return jsonify(empty_classrooms)
 
 
-@main.route('/board/')
+@main.route('/board/', methods=['GET', 'POST'])
 def board():
     db = get_db()
     if request.method == 'POST':
-        db.execute('INSERT INTO table_name (title, content, username) VALUES (?, ?, ?);',
-                   (request.values[title], request.values[content], request.values[username]))
-        return redirect("/board/")
+        data = request.get_json()
+        print(data['username'])
+        if not db.execute('SELECT name FROM User WHERE name = ?;', (data['username'],)):
+            db.execute('INSERT INTO User (name) VALUES (?);', (data['username'],))
+        db.execute('INSERT INTO Post (title, content, username) VALUES (?, ?, ?);',
+                   (data['title'], data['content'], data['username']))
+        db.commit()
+        return 'success'
     else:
         page = request.args.get('page')
+        page = '' if not page else int(page)
         if page:
             cursor = db.execute(
                 'SELECT * FROM Post ORDER BY isPinned DESC, posttime DESC;')
@@ -93,7 +103,7 @@ def board():
                 json_post = {}
                 for index, field in enumerate(post):
                     json_post[post_fields[index]] = field
-                posts.append(copy.deepcopy(json_post))
-            return posts
+                posts.append(json_post)
+            return jsonify(posts)
         else:
             return render_template('messageBoard.html')

@@ -89,17 +89,17 @@ function showResult(obj) {
     `)
 
     $("#classLable").append(`<h4> 以下為${currentBuilding}館的搜尋結果</h4>`)
-    for (var i = 0; i < obj.rooms.length; i++) {
-        console.log(obj.rooms[i])
+    for (var i = 0; i < obj.classrooms.length; i++) {
+        console.log(obj.classrooms[i])
         $("#classLable").append(`
             <div class="resultList">
-                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.rooms[i]}">
-                    ${obj.building}${obj.rooms[i]}
+                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.classrooms[i].room}">
+                    ${obj.building}${obj.classrooms[i].room}
                 </button>
             </div>
         `)
     }
-    if (obj.rooms.length == 0) {
+    if (obj.classrooms.length == 0) {
         $("#classLable").append(`<h4> 沒有符合條件的結果 </h4>`)
     }
 
@@ -137,7 +137,6 @@ $("document").ready(function () {
         console.log(data)
 
         $.ajax({
-            url: './mainPage.html',
             data: packageData(),
             type: "GET",
             datatype: "json",

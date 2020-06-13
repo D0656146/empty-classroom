@@ -26,7 +26,11 @@ def create_app(test_config=None):
         pass
 
     # load blueprint
-    bp = import_string('app.main.main:main')
+    bp = import_string('emptyclassroom.main.main:main')
     app.register_blueprint(bp)
+
+    # init db
+    from . import db
+    db.init_app(app)
 
     return app
