@@ -36,5 +36,5 @@ CREATE TABLE Period(
     course INTEGER REFERENCES Course(id) ON UPDATE CASCADE,
     classroom NCHAR(8) REFERENCES Classroom(id) ON UPDATE CASCADE,
     building NCHAR(10) REFERENCES Classroom(building) ON UPDATE CASCADE,
-    PRIMARY KEY(session, course, classroom)
+    PRIMARY KEY(session, course, classroom, building)
 );
