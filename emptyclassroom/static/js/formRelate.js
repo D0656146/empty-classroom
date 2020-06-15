@@ -78,6 +78,7 @@ function takeTable(obj){
 }
 
 function makeTable(obj){
+    console.log(obj)
     for(var i = 1; i <= 7; i++){
         for(var j = 0; j <= 14; j++){
             $(`#t${i}-${j}`).text(``)
@@ -86,9 +87,10 @@ function makeTable(obj){
     }
 
     for(var i = 0; i < obj.timetable.length; i++){
-        $(`#t${obj.timetable.day}-${obj.timetable.session}`).css("background-color","red")
-        $(`#t${obj.timetable.day}-${obj.timetable.session}`).text(obj.timetable.session.course)
+        $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).css("background-color","red")
+        $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).text(obj.timetable[i].course)
     }
+    $("#roomTable").show()
 }
 
 function showResult(obj) {
@@ -139,7 +141,7 @@ function showResult(obj) {
 }
 
 $("document").ready(function () {
-
+    $("#roomTable").hide()
     // no-used reset form
     //clearResult()
     $("#resetBtn").click(function () {
@@ -186,6 +188,25 @@ $("document").ready(function () {
 
         console.log($("button"))
 
+        var y = {
+            "locate": {
+                "building": "資電",
+                "room": '404',
+            },
+            "timetable": [
+                {
+                    "day": 1,
+                    "session": 1,
+                    "course": "音樂與人生"
+                },
+                {
+                    "day": 2,
+                    "session": 2,
+                    "course": "音樂與人生"
+                }
+            ]
+        }
+        makeTable(y)
     })
     
     
