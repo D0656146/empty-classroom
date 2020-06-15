@@ -1,5 +1,5 @@
 from emptyclassroom.db import get_db
-from emptyclassroom.main.main import main
+from emptyclassroom.main import main
 from flask import render_template, request, jsonify
 
 
@@ -21,7 +21,7 @@ def search():
         startAt = '' if not startAt else int(startAt)
         endAt = request.args.get('endAt')
         endAt = '' if not endAt else int(endAt)
-        if not building or not startAt or not endAt or startAt < endAt:
+        if not building or not startAt or not endAt or startAt > endAt:
             return 'leak of arguments'
         sessions = range((dayOfWeek - 1) * 7 + startAt,
                          (dayOfWeek - 1) * 7 + endAt + 1)
@@ -43,9 +43,12 @@ def search_curriculum(building, room):
     period_fields = ('session', 'course')
     timetable = []
     for period in cursor:
-        json_period = {}
-        for index, field in enumerate(period):
-            json_period[period_fields[index]] = field
+        json_period = {'course': period['course'], 'session': (
+            period['session'] - 1) % 14 + 1, 'day': period['session'] // 14 + 1}
+        # 配合前端修改
+        # json_period = {}
+        # for index, field in enumerate(period):
+        #     json_period[period_fields[index]] = field
         timetable.append(json_period)
     curriculum = {'locate': {'building': building, 'room': room}}
     curriculum['timetable'] = timetable
@@ -81,7 +84,8 @@ def board():
         data = request.get_json()
         print(data['username'])
         if not db.execute('SELECT name FROM User WHERE name = ?;', (data['username'],)):
-            db.execute('INSERT INTO User (name) VALUES (?);', (data['username'],))
+            db.execute('INSERT INTO User (name) VALUES (?);',
+                       (data['username'],))
         db.execute('INSERT INTO Post (title, content, username) VALUES (?, ?, ?);',
                    (data['title'], data['content'], data['username']))
         db.commit()

@@ -63,8 +63,7 @@ function clearResult() {
     $(".roomTable").remove()
     $("#hasNotSearched").show()
     $("#noResult").hide()
-    $("#searchResult > *").remove
-    currentBuilding = ""
+    $("#searchResult > *").remove()
 }
 
 function takeTable(obj){
@@ -131,9 +130,10 @@ function showResult(obj) {
             data: takeTable(this),
             datatype: 'json',
             success: function(e){
-                for(var i = 0; i < e.timetable.length; i++){
+                makeTable(e)
+                /*for(var i = 0; i < e.timetable.length; i++){
                     makeTable(e.timetable[i])
-                }
+                }*/
             }
 
         })
@@ -159,16 +159,21 @@ $("document").ready(function () {
         currentBuilding = $('#building').val()
         console.log(data)
 
+        // 改過
         $.ajax({
             data: packageData(),
             type: "GET",
             datatype: "json",
             success: function (e) {
                 console.log(e)
-                showResult(e)
+                if (parseInt(value("searchMode")) == 0) {
+                    showResult(e)
+                } else {
+                    makeTable(e)
+                }
             },
             error: function (e) {
-                alert(  )
+                alert()
             }
         })
     })

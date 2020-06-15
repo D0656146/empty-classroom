@@ -3,6 +3,7 @@ import json
 import time
 import re
 import sqlite3
+from emptyclassroom.db import db
 
 
 def crawl_fcu():
@@ -59,7 +60,7 @@ def crawl_fcu():
                     courses = json.loads(courses['d'])['items']
                     print(courses)
                     for course in courses:
-                        # 未考慮多時段
+                        # 未考慮多時段 未commit
                         scr_period = re.match(
                             '\s*\((?P<day>[^A-Za-z0-9_])\)\s*(?P<period>[\w\-]+)\s*(?P<building>[^A-Za-z0-9_\s]+)\s*(?P<classroom>[A-Za-z0-9_]*)\s*(?P<teachers>\S*)', course['scr_period']).groupdict()
                         print(scr_period)
@@ -81,7 +82,7 @@ def crawl_fcu():
                         print(periods)
                         for period in periods:
                             session = (
-                                day_to_int[scr_period['day']] - 1) * 15 + period
+                                day_to_int[scr_period['day']] - 1) * 14 + period
                             if not db.execute('SELECT id FROM Course WHERE id = ?', (course['scr_selcode'],)):
                                 db.execute('INSERT INTO Period (session, course, classroom, building) VALUES (?, ?, ?, ?)', (
                                     period, course['scr_selcode'], scr_period['classroom'], scr_period['building']))
