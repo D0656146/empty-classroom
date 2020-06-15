@@ -77,6 +77,20 @@ function takeTable(obj){
     return x
 }
 
+function makeTable(obj){
+    for(var i = 1; i <= 7; i++){
+        for(var j = 0; j <= 14; j++){
+            $(`#t${i}-${j}`).text(``)
+            $(`#t${i}-${j}`).css("background-color","white")
+        }
+    }
+
+    for(var i = 0; i < obj.timetable.length; i++){
+        $(`#t${obj.timetable.day}-${obj.timetable.session}`).css("background-color","red")
+        $(`#t${obj.timetable.day}-${obj.timetable.session}`).text(obj.timetable.session.course)
+    }
+}
+
 function showResult(obj) {
     //console.log(obj["building"])
     clearResult()
@@ -102,6 +116,11 @@ function showResult(obj) {
     if (obj.classrooms.length == 0) {
         $("#classLable").append(`<h4> 沒有符合條件的結果 </h4>`)
     }
+    $("#classLable").append(`<button id="research" class="btn btn-outline-danger"> 重新搜尋 </button>`)
+    
+    $("#research").click(function(){
+        location.reload()
+    })
 
     $(".checkTable").click(function(){
         console.log(this.id)
@@ -110,7 +129,9 @@ function showResult(obj) {
             data: takeTable(this),
             datatype: 'json',
             success: function(e){
-                //make table
+                for(var i = 0; i < e.timetable.length; i++){
+                    makeTable(e.timetable[i])
+                }
             }
 
         })
@@ -153,7 +174,7 @@ $("document").ready(function () {
     $('#testOutput').click(function () {
         var x = {
             "building": "資電",
-            "rooms": ['404A', '405', '406']
+            "classrooms": ['404A', '405', '406']
         }
 
         console.log(x)

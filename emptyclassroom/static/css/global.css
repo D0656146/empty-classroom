@@ -47,3 +47,7 @@ button {
     text-align: center;
     margin-top: 20px;
 }
+
+.nav-item {
+    color: white
+}

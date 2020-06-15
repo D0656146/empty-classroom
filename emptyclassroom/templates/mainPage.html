@@ -12,11 +12,41 @@
 <body>
     <header>
         <!-- logo section -->
-        <div id="logo" class="row">
+        <!--<div id="logo" class="row">
             <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <p class="title"> 逢甲空教室 </p>
             </div>
-        </div>
+        </div>-->
+        <nav class="navbar navbar-dark bg-primary navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#"> 逢甲空教室 </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">   <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown link
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+        </nav>
     </header>
 
     <main>
@@ -164,6 +194,168 @@
                 <div class="col-lg-2 col-md-2 col-sm-12 col-12 roomTable">
                     <button class="btn btn-info"> 教室課表 </button>
                 </div>-->
+            </div>
+            
+            <div id="roomTable" class="row  bg-light">
+                <p class="h3 p-3 col-12 bg-primary text-white"> 課表 </p>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                    <table class="table table-bordered .table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"> 一 </th>
+                            <th scope="col"> 二 </th>
+                            <th scope="col"> 三 </th>
+                            <th scope="col"> 四 </th>
+                            <th scope="col"> 五 </th>
+                            <th scope="col"> 六 </th>
+                            <th scope="col"> 日 </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <th id="t1-1" scope="col">  </th>
+                            <th id="t2-1" scope="col">  </th>
+                            <th id="t3-1" scope="col">  </th>
+                            <th id="t4-1" scope="col">  </th>
+                            <th id="t5-1" scope="col">  </th>
+                            <th id="t6-1" scope="col">  </th>
+                            <th id="t7-1" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">2 </th>
+                            <th id="t1-2" scope="col">  </th>
+                            <th id="t2-2" scope="col">  </th>
+                            <th id="t3-2" scope="col">  </th>
+                            <th id="t4-2" scope="col">  </th>
+                            <th id="t5-2" scope="col">  </th>
+                            <th id="t6-2" scope="col">  </th>
+                            <th id="t7-2" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">3 </th>
+                            <th id="t1-3" scope="col">  </th>
+                            <th id="t2-3" scope="col">  </th>
+                            <th id="t3-3" scope="col">  </th>
+                            <th id="t4-3" scope="col">  </th>
+                            <th id="t5-3" scope="col">  </th>
+                            <th id="t6-3" scope="col">  </th>
+                            <th id="t7-3" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">4 </th>
+                            <th id="t1-4" scope="col">  </th>
+                            <th id="t2-4" scope="col">  </th>
+                            <th id="t3-4" scope="col">  </th>
+                            <th id="t4-4" scope="col">  </th>
+                            <th id="t5-4" scope="col">  </th>
+                            <th id="t6-4" scope="col">  </th>
+                            <th id="t7-4" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">5 </th>
+                            <th id="t1-5" scope="col">  </th>
+                            <th id="t2-5" scope="col">  </th>
+                            <th id="t3-5" scope="col">  </th>
+                            <th id="t4-5" scope="col">  </th>
+                            <th id="t5-5" scope="col">  </th>
+                            <th id="t6-5" scope="col">  </th>
+                            <th id="t7-5" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">6 </th>
+                            <th id="t1-6" scope="col">  </th>
+                            <th id="t2-6" scope="col">  </th>
+                            <th id="t3-6" scope="col">  </th>
+                            <th id="t4-6" scope="col">  </th>
+                            <th id="t5-6" scope="col">  </th>
+                            <th id="t6-6" scope="col">  </th>
+                            <th id="t7-6" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">7</th>
+                            <th id="t1-7" scope="col">  </th>
+                            <th id="t2-7" scope="col">  </th>
+                            <th id="t3-7" scope="col">  </th>
+                            <th id="t4-7" scope="col">  </th>
+                            <th id="t5-7" scope="col">  </th>
+                            <th id="t6-7" scope="col">  </th>
+                            <th id="t7-7" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">8 </th>
+                            <th id="t1-8" scope="col">  </th>
+                            <th id="t2-8" scope="col">  </th>
+                            <th id="t3-8" scope="col">  </th>
+                            <th id="t4-8" scope="col">  </th>
+                            <th id="t5-8" scope="col">  </th>
+                            <th id="t6-8" scope="col">  </th>
+                            <th id="t7-8" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">9 </th>
+                            <th id="t1-9" scope="col">  </th>
+                            <th id="t2-9" scope="col">  </th>
+                            <th id="t3-9" scope="col">  </th>
+                            <th id="t4-9" scope="col">  </th>
+                            <th id="t5-9" scope="col">  </th>
+                            <th id="t6-9" scope="col">  </th>
+                            <th id="t7-9" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">10 </th>
+                            <th id="t1-10" scope="col">  </th>
+                            <th id="t2-10" scope="col">  </th>
+                            <th id="t3-10" scope="col">  </th>
+                            <th id="t4-10" scope="col">  </th>
+                            <th id="t5-10" scope="col">  </th>
+                            <th id="t6-10" scope="col">  </th>
+                            <th id="t7-10" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">11 </th>
+                            <th id="t1-11" scope="col">  </th>
+                            <th id="t2-11" scope="col">  </th>
+                            <th id="t3-11" scope="col">  </th>
+                            <th id="t4-11" scope="col">  </th>
+                            <th id="t5-11" scope="col">  </th>
+                            <th id="t6-11" scope="col">  </th>
+                            <th id="t7-11" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">12 </th>
+                            <th id="t1-12" scope="col">  </th>
+                            <th id="t2-12" scope="col">  </th>
+                            <th id="t3-12" scope="col">  </th>
+                            <th id="t4-12" scope="col">  </th>
+                            <th id="t5-12" scope="col">  </th>
+                            <th id="t6-12" scope="col">  </th>
+                            <th id="t7-12" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">13 </th>
+                            <th id="t1-13" scope="col">  </th>
+                            <th id="t2-13" scope="col">  </th>
+                            <th id="t3-13" scope="col">  </th>
+                            <th id="t4-13" scope="col">  </th>
+                            <th id="t5-13" scope="col">  </th>
+                            <th id="t6-13" scope="col">  </th>
+                            <th id="t7-13" scope="col">  </th>
+                          </tr>
+                          <tr>
+                            <th scope="row">14 </th>
+                            <th id="t1-14" scope="col">  </th>
+                            <th id="t2-14" scope="col">  </th>
+                            <th id="t3-14" scope="col">  </th>
+                            <th id="t4-14" scope="col">  </th>
+                            <th id="t5-14" scope="col">  </th>
+                            <th id="t6-14" scope="col">  </th>
+                            <th id="t7-14" scope="col">  </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
             </div>
         </div>
     </main>
