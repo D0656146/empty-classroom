@@ -43,7 +43,10 @@ def search_curriculum(building, room):
     period_fields = ('session', 'course')
     timetable = []
     for period in cursor:
-        json_period = {'course': period['course'], 'session': (
+        course_names = db.execute('SELECT name FROM Course WHERE id = ?', (period['course'],))
+        for value in course_names:
+            course_name = value
+        json_period = {'course': course_name[0], 'session': (
             period['session'] - 1) % 14 + 1, 'day': period['session'] // 14 + 1}
         # 配合前端修改
         # json_period = {}
@@ -82,7 +85,6 @@ def board():
     db = get_db()
     if request.method == 'POST':
         data = request.get_json()
-        print(data['username'])
         if not db.execute('SELECT name FROM User WHERE name = ?;', (data['username'],)):
             db.execute('INSERT INTO User (name) VALUES (?);',
                        (data['username'],))
