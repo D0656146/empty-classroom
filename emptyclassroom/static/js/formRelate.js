@@ -116,7 +116,7 @@ function showResult(obj) {
     if (obj.classrooms.length == 0) {
         $("#classLable").append(`<h4> 沒有符合條件的結果 </h4>`)
     }
-    $("#classLable").append(`<button id="research" class="btn btn-outline-danger"> 重新搜尋 </button>`)
+    $("#classLable").append(`<br><button id="research" class="btn btn-outline-danger"> 重新搜尋 </button>`)
     
     $("#research").click(function(){
         location.reload()
@@ -174,7 +174,11 @@ $("document").ready(function () {
     $('#testOutput').click(function () {
         var x = {
             "building": "資電",
-            "classrooms": ['404A', '405', '406']
+            "classrooms": [{
+                "room": '404',
+                "socket": 2,
+                "ac": true
+            }]
         }
 
         console.log(x)
