@@ -149,5 +149,5 @@ $("document").ready(function () {
     })*/
 
     getPage()
-    $(".test").hide()
+    //$(".test").hide()
 })

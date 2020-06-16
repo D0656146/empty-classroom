@@ -91,9 +91,10 @@ function takeTable(obj){
 
 function makeTable(obj){
     console.log(obj)
-
+    clearTable()
     for(var i = 0; i < obj.timetable.length; i++){
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).addClass("bg-secondary")
+        $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).addClass("text-light")
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).removeClass("bg-light")
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).text(obj.timetable[i].course)
     }
