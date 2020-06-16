@@ -116,6 +116,7 @@ $("document").ready(function () {
                     complete: function (xhr, status) {
                         if (xhr.status == 200) {
                             alert('發表成功')
+                            $.reload()
                         } else {
                             alert('發生不可預期的錯誤，請稍後再試')
                         }
@@ -125,7 +126,7 @@ $("document").ready(function () {
         }
     })
 
-    /*$('.test').click(function () {
+    $('.test').click(function () {
         var x = [{
             'id': 1,
             'title': "AAA",
@@ -146,8 +147,8 @@ $("document").ready(function () {
         for(var i = 0; i < x.length; i++){
             showMessage(x[i])
         }
-    })*/
+    })
 
     getPage()
-    //$(".test").hide()
+    $(".test").hide()
 })
