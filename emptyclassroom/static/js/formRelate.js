@@ -184,12 +184,8 @@ $("document").ready(function () {
                 }
             },
             error: function (e) {
-<<<<<<< HEAD
                 alert("發生不可預期的錯誤，請稍後在試")
                 showResult(e)
-=======
-                alert()
->>>>>>> 80504d6e41a18cb08c29eb703e2e06778c45b175
             }
         })
     })
