@@ -125,7 +125,7 @@ $("document").ready(function () {
         }
     })
 
-    $('.test').click(function () {
+    /*$('.test').click(function () {
         var x = [{
             'id': 1,
             'title': "AAA",
@@ -146,17 +146,8 @@ $("document").ready(function () {
         for(var i = 0; i < x.length; i++){
             showMessage(x[i])
         }
-    })
+    })*/
 
     getPage()
+    $(".test").hide()
 })
-
-/*
-{
-    'page': 1
-}
-
-{
-
-}
-*/

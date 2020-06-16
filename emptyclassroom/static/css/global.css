@@ -10,10 +10,17 @@ body{
     background-image: url("../img/bg-image2.jpg");
 }
 
-button {
-    float: right;
+button{
     margin: 10px
 }
+
+.serachBtn{
+    float: right;
+}
+
+/*.checkTable{
+    
+}*/
 
 .breakline {
     height: 3px;
@@ -50,4 +57,10 @@ button {
 
 .nav-item {
     color: white
+}
+
+footer {
+    margin-top: 20px;
+    bottom: 0;
+    width: 100%;
 }

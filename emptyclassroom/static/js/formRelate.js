@@ -63,8 +63,20 @@ function clearResult() {
     $(".roomTable").remove()
     $("#hasNotSearched").show()
     $("#noResult").hide()
-    $("#searchResult > *").remove
+    $("#roomTable").hide()
+    $("#searchResult").hide()
+    $(`#searchResult > *:not(".h3")`).remove()
     currentBuilding = ""
+}
+
+function clearTable(){
+    for(var i = 1; i <= 7; i++){
+        for(var j = 0; j <= 14; j++){
+            $(`#t${i}-${j}`).text(``)
+            $(`#t${i}-${j}`).removeClass("bg-secondary")
+            $(`#t${i}-${j}`).addClass("bg-light")
+        }
+    }
 }
 
 function takeTable(obj){
@@ -79,15 +91,10 @@ function takeTable(obj){
 
 function makeTable(obj){
     console.log(obj)
-    for(var i = 1; i <= 7; i++){
-        for(var j = 0; j <= 14; j++){
-            $(`#t${i}-${j}`).text(``)
-            $(`#t${i}-${j}`).css("background-color","white")
-        }
-    }
 
     for(var i = 0; i < obj.timetable.length; i++){
-        $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).css("background-color","red")
+        $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).addClass("bg-secondary")
+        $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).removeClass("bg-light")
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).text(obj.timetable[i].course)
     }
     $("#roomTable").show()
@@ -103,16 +110,15 @@ function showResult(obj) {
         </div>
         <div id="classLable" class="col-lg-6 col-md-6 col-12"></div>
     `)
-
-    $("#classLable").append(`<h4> 以下為${currentBuilding}館的搜尋結果</h4>`)
+    var buildingName = $(`#building > option[value="${currentBuilding}"]`).text()
+    $("#classLable").append(`<h4> 以下為<b><i>${buildingName}</i></b>的搜尋結果</h4>`)
+    $("#classLable").append(`<div id="resultList"></div>`)
     for (var i = 0; i < obj.classrooms.length; i++) {
         console.log(obj.classrooms[i])
-        $("#classLable").append(`
-            <div class="resultList">
-                <button class="btn btn-outline-primary checkTable" type="button" id="${obj.classrooms[i].room}">
-                    ${obj.building}${obj.classrooms[i].room}
-                </button>
-            </div>
+        $("#resultList").append(`            
+            <button class="btn btn-outline-primary checkTable" type="button" id="${obj.classrooms[i].room}">
+                ${obj.building}${obj.classrooms[i].room}
+            </button>
         `)
     }
     if (obj.classrooms.length == 0) {
@@ -121,7 +127,8 @@ function showResult(obj) {
     $("#classLable").append(`<br><button id="research" class="btn btn-outline-danger"> 重新搜尋 </button>`)
     
     $("#research").click(function(){
-        location.reload()
+        clearResult()
+        clearTable()
     })
 
     $(".checkTable").click(function(){
@@ -138,10 +145,12 @@ function showResult(obj) {
 
         })
     })
+    $("#searchResult").show()
 }
 
 $("document").ready(function () {
     $("#roomTable").hide()
+    $("#searchResult").hide()
     // no-used reset form
     //clearResult()
     $("#resetBtn").click(function () {
@@ -164,15 +173,18 @@ $("document").ready(function () {
             type: "GET",
             datatype: "json",
             success: function (e) {
+                
                 console.log(e)
                 showResult(e)
             },
             error: function (e) {
-                alert(  )
+                alert("發生不可預期的錯誤，請稍後在試")
+                showResult(e)
             }
         })
     })
 
+    
     $('#testOutput').click(function () {
         var x = {
             "building": "資電",
@@ -180,13 +192,30 @@ $("document").ready(function () {
                 "room": '404',
                 "socket": 2,
                 "ac": true
+            },{
+                "room": '405',
+                "socket": 2,
+                "ac": true
+            },{
+                "room": '406',
+                "socket": 2,
+                "ac": true
+            },{
+                "room": '407',
+                "socket": 2,
+                "ac": true
+            },{
+                "room": '408',
+                "socket": 2,
+                "ac": true
+            },{
+                "room": '409',
+                "socket": 2,
+                "ac": true
             }]
         }
 
-        console.log(x)
         showResult(x)
-
-        console.log($("button"))
 
         var y = {
             "locate": {
@@ -208,7 +237,8 @@ $("document").ready(function () {
         }
         makeTable(y)
     })
-    
+
+    $("#testOutput").hide()
     
 })
 
