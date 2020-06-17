@@ -23,8 +23,8 @@ def search():
         endAt = '' if not endAt else int(endAt)
         if not building or not startAt or not endAt or startAt > endAt:
             return 'leak of arguments'
-        sessions = range((dayOfWeek - 1) * 7 + startAt,
-                         (dayOfWeek - 1) * 7 + endAt + 1)
+        sessions = range((dayOfWeek - 1) * 14 + startAt,
+                         (dayOfWeek - 1) * 14 + endAt + 1)
         return search_empty_classroom(building, room, sessions)
     elif searchMode == 2:
         if not building or not room:
@@ -63,11 +63,11 @@ def search_empty_classroom(building, room, sessions):
     command = f"SELECT id, socket, ac FROM Classroom WHERE building = '{building}'"
     if room:
         command += f" AND id = '{room}'"
-    command += ' AND id NOT IN (SELECT classroom FROM Period WHERE'
+    command += f" AND NOT EXISTS (SELECT 1 FROM Period WHERE building = '{building}' AND id = classroom AND ("
     for session in sessions:
         command += f' session = {session} OR'
     command = command[0:-2]
-    command += ') ORDER BY id;'
+    command += ')) ORDER BY id;'
     cursor = db.execute(command)
     classroom_field = ('room', 'socket', 'ac')
     classrooms = []
