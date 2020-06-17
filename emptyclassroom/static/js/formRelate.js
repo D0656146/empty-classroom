@@ -33,6 +33,10 @@ function inputAcceptable() {
         alert("教室編號格式錯誤，請重新輸入")
         bool = false
     }
+    if(value("searchMode") == 2 && value("room")==""){
+        alert("查詢課表一定要填寫教室編號")
+        bool = false
+    }
     return bool
 }
 

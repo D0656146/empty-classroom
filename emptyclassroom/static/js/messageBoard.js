@@ -34,8 +34,9 @@ function sendMessage() {
 }
 
 function showMessage(e) {
-    
-    if(e.isPinned){
+    console.log(e)
+    console.log(e.isPinned==true)
+    if(e.isPinned==true){
         $('#topicMessageGroup').append(`
             <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                 <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
