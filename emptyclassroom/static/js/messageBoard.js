@@ -63,6 +63,12 @@ function showMessage(e) {
             </div>
         `)
     }
+    $(".replyBtn").click(function(){
+        var title = $(this).parent().prev().children("h4").text()
+        $("#messageTitle").val(`Re: ${title}`)
+        location.hash = "#leaveMessageGroup"
+        console.log(title)
+    })
 }
 
 function getPage() {
@@ -74,6 +80,9 @@ function getPage() {
             var len = e.length
             for (var i = 0; i < len; i++) {
                 showMessage(e[i])
+            }
+            if (len < 10){
+                $('#railButton').before(`<h4>沒有更多留言了</h4>`)
             }
         },
         error: function (e) {
@@ -115,7 +124,7 @@ $("document").ready(function () {
                     complete: function (xhr, status) {
                         if (xhr.status == 200) {
                             alert('發表成功')
-                            $.reload()
+                            location.reload()
                         } else {
                             alert('發生不可預期的錯誤，請稍後再試')
                         }

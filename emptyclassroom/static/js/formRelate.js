@@ -102,7 +102,14 @@ function makeTable(obj){
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).removeClass("bg-light")
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).text(obj.timetable[i].course)
     }
-    $("#roomTable").show()
+
+    $("#tableSection > p").remove()
+    if(obj.timetable.length == 0){
+        $("table").before(`<p class="h4"><b>${obj.locate.building}${obj.locate.room}</b> 不是教室或無資料</p>`)
+    } else{
+        $("table").before(`<p class="h4"><b>${obj.locate.building}${obj.locate.room}</b> 的課表</p>`)
+        $("#roomTable").show()
+    }
 }
 
 function showResult(obj) {
@@ -116,7 +123,7 @@ function showResult(obj) {
         <div id="classLable" class="col-lg-6 col-md-6 col-12"></div>
     `)
     var buildingName = $(`#building > option[value="${currentBuilding}"]`).text()
-    $("#classLable").append(`<h4> 以下為<b><i>${buildingName}</i></b>的搜尋結果</h4>`)
+    $("#classLable").append(`<h4> 以下為<b><i>${buildingName}${value("room")}</i></b>的搜尋結果</h4>`)
     $("#classLable").append(`<div id="resultList"></div>`)
     for (var i = 0; i < obj.classrooms.length; i++) {
         console.log(obj.classrooms[i])
@@ -131,7 +138,7 @@ function showResult(obj) {
     }
     $("#classLable").append(`<br><button id="research" class="btn btn-outline-danger"> 重新搜尋 </button>`)
     
-    $("#research").click(function(){
+    $("#research, #clear").click(function(){
         clearResult()
         clearTable()
     })
@@ -147,6 +154,7 @@ function showResult(obj) {
                 /*for(var i = 0; i < e.timetable.length; i++){
                     makeTable(e.timetable[i])
                 }*/
+                location.hash = "#roomTable"
             }
 
         })
@@ -184,8 +192,14 @@ $("document").ready(function () {
                 console.log(e)
                 if (parseInt(value("searchMode")) == 0) {
                     showResult(e)
-                } else {
+                    $("#searchResult").show()
+                    $("#roomTable").hide()
+                    location.hash = "#searchResult"
+                } else if(parseInt(value("searchMode"))==2){
+                    $("#searchResult").hide()
+                    $("#roomTable").show()
                     makeTable(e)
+                    location.hash = "#roomTable"
                 }
             },
             error: function (e) {
