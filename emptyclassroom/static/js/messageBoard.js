@@ -50,10 +50,10 @@ function showMessage(e) {
         `)
     }else{
         $('#railButton').before(`
-            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-12">
                 <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
                 <h4 class="font-weight-bolder"> ${e.title} </h4>
                 <p> ${e.content} </p>
                 <small> 由 <a href="#"> ${e.username} </a> 發文於 ${e.posttime}，訊息編號：<a href="#">T${e.id}</a></small>
@@ -71,6 +71,7 @@ function showMessage(e) {
     })
 }
 
+var noMsg = false
 function getPage() {
     $.ajax({
         data: {'page': ++currentPage},
@@ -81,8 +82,9 @@ function getPage() {
             for (var i = 0; i < len; i++) {
                 showMessage(e[i])
             }
-            if (len < 10){
-                $('#railButton').before(`<h4>沒有更多留言了</h4>`)
+            if (len < 10 && !noMsg){
+                $('#railButton').before(`<h5>沒有更多留言了</h5>`)
+                noMsg = true
             }
         },
         error: function (e) {
