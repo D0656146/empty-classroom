@@ -33,7 +33,7 @@ function inputAcceptable() {
         alert("教室編號格式錯誤，請重新輸入")
         bool = false
     }
-    if(value("searchMode") == 2 && value("room")==""){
+    if (value("searchMode") == 2 && value("room") == "") {
         alert("查詢課表一定要填寫教室編號")
         bool = false
     }
@@ -73,9 +73,9 @@ function clearResult() {
     currentBuilding = ""
 }
 
-function clearTable(){
-    for(var i = 1; i <= 7; i++){
-        for(var j = 0; j <= 14; j++){
+function clearTable() {
+    for (var i = 1; i <= 7; i++) {
+        for (var j = 0; j <= 14; j++) {
             $(`#t${i}-${j}`).text(``)
             $(`#t${i}-${j}`).removeClass("bg-secondary")
             $(`#t${i}-${j}`).addClass("bg-light")
@@ -83,7 +83,7 @@ function clearTable(){
     }
 }
 
-function takeTable(obj){
+function takeTable(obj) {
     var x = {
         'searchMode': 2,
         'building': currentBuilding,
@@ -93,10 +93,10 @@ function takeTable(obj){
     return x
 }
 
-function makeTable(obj){
+function makeTable(obj) {
     console.log(obj)
     clearTable()
-    for(var i = 0; i < obj.timetable.length; i++){
+    for (var i = 0; i < obj.timetable.length; i++) {
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).addClass("bg-secondary")
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).addClass("text-light")
         $(`#t${obj.timetable[i].day}-${obj.timetable[i].session}`).removeClass("bg-light")
@@ -104,9 +104,9 @@ function makeTable(obj){
     }
 
     $("#tableSection > p").remove()
-    if(obj.timetable.length == 0){
+    if (obj.timetable.length == 0) {
         $("table").before(`<p class="h4"><b>${obj.locate.building}${obj.locate.room}</b> 不是教室或無資料</p>`)
-    } else{
+    } else {
         $("table").before(`<p class="h4"><b>${obj.locate.building}${obj.locate.room}</b> 的課表</p>`)
         $("#roomTable").show()
     }
@@ -137,19 +137,19 @@ function showResult(obj) {
         $("#classLable").append(`<h4> 沒有符合條件的結果 </h4>`)
     }
     $("#classLable").append(`<br><button id="research" class="btn btn-outline-danger"> 重新搜尋 </button>`)
-    
-    $("#research, #clear").click(function(){
+
+    $("#research, #clear").click(function () {
         clearResult()
         clearTable()
     })
 
-    $(".checkTable").click(function(){
+    $(".checkTable").click(function () {
         console.log(this.id)
         $.ajax({
             type: "GET",
             data: takeTable(this),
             datatype: 'json',
-            success: function(e){
+            success: function (e) {
                 makeTable(e)
                 /*for(var i = 0; i < e.timetable.length; i++){
                     makeTable(e.timetable[i])
@@ -188,14 +188,14 @@ $("document").ready(function () {
             type: "GET",
             datatype: "json",
             success: function (e) {
-                
+
                 console.log(e)
                 if (parseInt(value("searchMode")) == 0) {
                     showResult(e)
                     $("#searchResult").show()
                     $("#roomTable").hide()
                     location.hash = "#searchResult"
-                } else if(parseInt(value("searchMode"))==2){
+                } else if (parseInt(value("searchMode")) == 2) {
                     $("#searchResult").hide()
                     $("#roomTable").show()
                     makeTable(e)
@@ -209,7 +209,7 @@ $("document").ready(function () {
         })
     })
 
-    
+
     $('#testOutput').click(function () {
         var x = {
             "building": "資電",
@@ -217,23 +217,23 @@ $("document").ready(function () {
                 "room": '404',
                 "socket": 2,
                 "ac": true
-            },{
+            }, {
                 "room": '405',
                 "socket": 2,
                 "ac": true
-            },{
+            }, {
                 "room": '406',
                 "socket": 2,
                 "ac": true
-            },{
+            }, {
                 "room": '407',
                 "socket": 2,
                 "ac": true
-            },{
+            }, {
                 "room": '408',
                 "socket": 2,
                 "ac": true
-            },{
+            }, {
                 "room": '409',
                 "socket": 2,
                 "ac": true
@@ -264,6 +264,6 @@ $("document").ready(function () {
     })
 
     $("#testOutput").hide()
-    
+
 })
 

@@ -34,7 +34,7 @@ function sendMessage() {
 }
 
 function showMessage(e) {
-    if(e.isPinned){
+    if (e.isPinned == 'TRUE') {
         $('#topicMessageGroup').append(`
             <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                 <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
@@ -48,7 +48,7 @@ function showMessage(e) {
                 <button class="btn btn-primary replyBtn"> 回應 </button>
             </div>
         `)
-    }else{
+    } else {
         $('#railButton').before(`
             <div class="col-lg-4 col-md-12 col-sm-12 col-12">
                 <img src="../static/img/test.png" class="img-thumbnail" alt="photo">
@@ -63,7 +63,7 @@ function showMessage(e) {
             </div>
         `)
     }
-    $(".replyBtn").click(function(){
+    $(".replyBtn").click(function () {
         var title = $(this).parent().prev().children("h4").text()
         $("#messageTitle").val(`Re: ${title}`)
         location.hash = "#leaveMessageGroup"
@@ -74,7 +74,7 @@ function showMessage(e) {
 var noMsg = false
 function getPage() {
     $.ajax({
-        data: {'page': ++currentPage},
+        data: { 'page': ++currentPage },
         dataType: 'json',
         type: 'GET',
         success: function (e) {
@@ -82,7 +82,7 @@ function getPage() {
             for (var i = 0; i < len; i++) {
                 showMessage(e[i])
             }
-            if (len < 10 && !noMsg){
+            if (len < 10 && !noMsg) {
                 $('#railButton').before(`<h5>沒有更多留言了</h5>`)
                 noMsg = true
             }
@@ -96,7 +96,7 @@ function getPage() {
 
 
 $("document").ready(function () {
-    
+
     $(".get-content").click(function () {
         getPage()
     })
@@ -154,7 +154,7 @@ $("document").ready(function () {
             'username': "jibanyan"
         }]
 
-        for(var i = 0; i < x.length; i++){
+        for (var i = 0; i < x.length; i++) {
             showMessage(x[i])
         }
     })
